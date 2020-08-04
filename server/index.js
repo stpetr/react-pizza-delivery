@@ -4,6 +4,7 @@ const path = require('path')
 require('./db/mongoose')
 
 const adminRouter = require('./routers/admin')
+const apiRouter = require('./routers/api')
 
 const PORT = process.env.PORT
 
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(express.static(publicDirectoryPath))
 app.use(express.json())
 app.use(adminRouter)
+app.use(apiRouter)
 
 app.get('*', (req, res, next) => {
     res.sendFile(path.join(publicDirectoryPath, 'index.html'))
