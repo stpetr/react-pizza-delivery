@@ -15,6 +15,10 @@ app.use(express.static(publicDirectoryPath))
 app.use(express.json())
 app.use(adminRouter)
 
+app.get('*', (req, res, next) => {
+    res.sendFile(path.join(publicDirectoryPath, 'index.html'))
+})
+
 app.listen(PORT, () => {
     console.log('Server is up on port:', PORT)
 })
