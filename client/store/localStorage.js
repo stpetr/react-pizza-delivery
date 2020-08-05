@@ -3,7 +3,7 @@ const CART_KEY = 'cart'
 const getCart = () => {
     try {
         const cart = JSON.parse(localStorage.getItem(CART_KEY))
-        if (typeof cart === 'object') {
+        if (cart && typeof cart === 'object') {
             return cart
         }
 
