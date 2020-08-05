@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { cartAddItem } from "../actions/cart";
 
 export class ProductItem extends React.Component {
+    onAddToCart = (product) => {
+        this.props.cartAddItem(product)
+    }
     render() {
         const { product } = this.props
         return (
@@ -13,6 +16,7 @@ export class ProductItem extends React.Component {
                 <div className="product-item__content">
                     <h3 className="product-item__title">{product.title}</h3>
                     <p className="product-item__description">{product.description}</p>
+                    <button onClick={() => this.onAddToCart(product)}>Add to cart</button>
                 </div>
             </div>
         )
