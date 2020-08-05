@@ -25,6 +25,7 @@ const getImageFilter = (fileSize) => {
 }
 
 const getMulter = (dest, options) => {
+    console.log(__dirname)
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, path.join(uploadsDir, dest))
