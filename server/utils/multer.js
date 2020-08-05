@@ -2,7 +2,7 @@ const multer = require('multer')
 const path = require('path')
 const { v4: uuid } = require('uuid')
 
-const uploadsDir = 'public/uploads'
+const uploadsDir = path.join(__dirname, '../../public/uploads')
 
 const getImageFilter = (fileSize) => {
     const filter = {
