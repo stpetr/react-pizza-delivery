@@ -1,13 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import configureStore from './store/configureStore'
+import AppRouter from "./routers/AppRouter";
 
+import 'normalize.css/normalize.css'
 import './styles/main.less'
 
+const store = configureStore()
 const jsx = (
-    <div>
-        <h1>Buy Pizza Pie</h1>
-        <p>Pepperoni and green peppers, mushrooms, olive, chives</p>
-    </div>
+    <Provider store={store}>
+        <AppRouter />
+    </Provider>
 )
 
 ReactDOM.render(jsx, document.querySelector('#app'))
