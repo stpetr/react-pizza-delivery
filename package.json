@@ -8,7 +8,9 @@
     "client-build:dev": "webpack",
     "client-build:prod": "webpack -p --env=production",
     "server-start": "node server/index.js",
-    "server-dev": "env-cmd -f ./config/dev.env nodemon server/index.js"
+    "server-dev": "env-cmd -f ./config/dev.env nodemon server/index.js",
+    "start": "node server/index.js",
+    "heroku-postbuild": "npm run client-build:prod"
   },
   "repository": {
     "type": "git",
