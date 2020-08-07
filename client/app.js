@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { fetchProducts } from './actions/products'
 import { cartInit } from "./actions/cart"
-import configureStore from './store/configureStore'
+import store from './store/store'
 import AppRouter from "./routers/AppRouter"
 
 import 'normalize.css/normalize.css'
 import './styles/main.less'
 
-const store = configureStore()
 const jsx = (
     <Provider store={store}>
         <AppRouter />
