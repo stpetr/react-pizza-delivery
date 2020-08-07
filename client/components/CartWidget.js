@@ -57,7 +57,7 @@ export class CartWidget extends React.Component {
                             <span className="cart-widget__amount-title">Total:</span>
                             <span className="cart-widget__amount-value">{getAmountInCurrencyFormatted(this.getAmount(), this.props.currency)}</span>
                         </div>
-                        <button className="btn -pill cart-widget__checkout-btn" onClick={() => {}}>Checkout</button>
+                        <button className="btn -pill cart-widget__checkout-btn" onClick={this.props.navigateToOrderPage}>Checkout</button>
                     </div>
                 }
             </div>
