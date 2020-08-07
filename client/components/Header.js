@@ -1,27 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import CartWidget from "./CartWidget";
+import { NavLink } from 'react-router-dom'
 import CurrencyList from "./CurrencyList";
+
+const activeClass = {
+    activeClassName: "is-active"
+}
 
 export const Header = () => (
     <header className="header">
         <div className="content-container">
             <div className="header__content">
-                <Link className="header__link" to="/">
+                <NavLink className="header__link" to="/" exact={true} {...activeClass}>
                     Home
-                </Link>
-                <Link className="header__link" to="/order">
+                </NavLink>
+                <NavLink className="header__link" to="/order" {...activeClass}>
                     Order
-                </Link>
-                <Link className="header__link" to="/promo">
+                </NavLink>
+                <NavLink className="header__link" to="/promo" {...activeClass}>
                     Promo
-                </Link>
-                <Link className="header__link" to="/delivery">
+                </NavLink>
+                <NavLink className="header__link" to="/delivery" {...activeClass}>
                     Delivery
-                </Link>
-                <Link className="header__link" to="/about">
+                </NavLink>
+                <NavLink className="header__link" to="/about" {...activeClass}>
                     About Us
-                </Link>
+                </NavLink>
                 <CurrencyList />
             </div>
         </div>

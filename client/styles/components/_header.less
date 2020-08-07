@@ -10,9 +10,26 @@
   }
 
   &__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
     font-size: @font-size-large;
     font-weight: bold;
     color: white;
     text-decoration: none;
+
+    &.is-active {
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        display: block;
+        height: .4rem;
+        width: calc(100% + 2rem);
+        margin-left: -1rem;
+        background-color: @white;
+      }
+    }
   }
 }
