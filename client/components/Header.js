@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CartWidget from "./CartWidget";
+import CurrencyList from "./CurrencyList";
 
 export const Header = () => (
     <header className="header">
@@ -21,6 +22,7 @@ export const Header = () => (
                 <Link className="header__link" to="/about">
                     About Us
                 </Link>
+                <CurrencyList />
             </div>
         </div>
     </header>

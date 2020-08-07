@@ -1,0 +1,24 @@
+.currency-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: inherit;
+
+  li {
+    font-size: 2.4rem;
+    font-weight: lighter;
+    cursor: pointer;
+    opacity: .5;
+    color: inherit;
+
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    &.is-active {
+      font-weight: bold;
+      opacity: 1;
+    }
+  }
+}

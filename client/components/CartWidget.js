@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { cartIncrementQty, cartDecrementQty, cartRemoveItem, cartClear } from '../actions/cart'
+import CurrencyList from "./CurrencyList";
 
 export class CartWidget extends React.Component {
     getAmount = () => this.props.cart.reduce((amount, item) => amount + item.product.price * item.qty, 0)
@@ -9,10 +10,13 @@ export class CartWidget extends React.Component {
         return (
             <div className="cart-widget">
                 <h3 className="cart-widget__title">
-                    <span>Cart</span>
-                    { this.props.cart.length > 0 &&
-                        <span className="cart-widget__title-qty">({this.getProductsTotalQty()})</span>
-                    }
+                    <div>
+                        <span>Cart</span>
+                        { this.props.cart.length > 0 &&
+                            <span className="cart-widget__title-qty">({this.getProductsTotalQty()})</span>
+                        }
+                    </div>
+                    <CurrencyList />
                 </h3>
                 { !this.props.cart.length &&
                     <div className="cart-widget__empty-message">The cart is empty. Please pick something from our menu</div>
