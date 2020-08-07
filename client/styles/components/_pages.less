@@ -1,5 +1,6 @@
 .page {
   padding-top: 6rem;
+  padding-bottom: 4rem;
 
   &__heading {
     margin: 0 0 4rem;
@@ -25,5 +26,77 @@
         }
       }
     }
+  }
+
+  &__order {
+    .cart-widget {
+      &__checkout-btn {
+        display: none;
+      }
+    }
+  }
+
+  &__order-confirm {
+    width: 50%;
+    margin: 4rem 0;
+    padding: 4rem;
+    background-color: @white;
+
+    .page__heading {
+      margin-bottom: 4rem;
+    }
+
+    .order-info {
+      &__products {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      &__delivery {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      &__section-title {
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      &__subtotal {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        font-weight: 500;
+        text-align: right;
+      }
+
+      &__total {
+        margin-bottom: 2rem;
+        font-size: 2.4rem;
+        font-weight: 600;
+      }
+    }
+
+    .action-buttons {
+      .btn {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &__order-success {
+    width: 50%;
+    margin: 4rem 0;
+    padding: 4rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: @white;
   }
 }

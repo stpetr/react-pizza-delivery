@@ -1,0 +1,45 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  input {
+    &[type="submit"] {
+      cursor: pointer;
+
+      &:disabled {
+        cursor: default;
+      }
+    }
+  }
+
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    color: @white;
+    background-color: tomato;
+
+    p {
+      margin: 0;
+      font-style: italic;
+    }
+  }
+
+  .text-input {
+    height: 5rem;
+    width: calc(50% - 1rem);
+    margin-bottom: 2rem;
+    padding: 1rem;
+
+    &.-full-width {
+      width: 100%;
+    }
+
+    &.-textarea {
+      min-height: 10rem;
+    }
+  }
+}

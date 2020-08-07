@@ -13,9 +13,6 @@ export const Header = () => (
                 <NavLink className="header__link" to="/" exact={true} {...activeClass}>
                     Home
                 </NavLink>
-                <NavLink className="header__link" to="/order" {...activeClass}>
-                    Order
-                </NavLink>
                 <NavLink className="header__link" to="/promo" {...activeClass}>
                     Promo
                 </NavLink>

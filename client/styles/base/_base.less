@@ -46,6 +46,7 @@ button {
 }
 
 .content-container {
+  width: 100%;
   max-width: 120rem;
   margin: 0 auto;
   padding: 0 @m-size;
@@ -53,6 +54,10 @@ button {
 
 .with-sidebar {
   display: flex;
+
+  .content {
+    flex-grow: 1;
+  }
 
   .sidebar {
     flex: 0 0;
@@ -62,11 +67,21 @@ button {
 }
 
 .btn {
+  &:disabled {
+    opacity: .5;
+  }
+
   &.-pill {
     padding: 1.5rem 2.5rem;
     color: @white;
     background-color: @brand-color;
     border: none;
     border-radius: 2.4rem;
+
+    &.-cancel {
+      color: @off-black;
+      background-color: @off-white;
+      border: .1rem solid @light-grey;
+    }
   }
 }
