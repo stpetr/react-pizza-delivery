@@ -1,0 +1,8 @@
+.textLinesLimit(@lines, @maxHeight) {
+  display: -webkit-box;
+  max-height: @maxHeight;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+}

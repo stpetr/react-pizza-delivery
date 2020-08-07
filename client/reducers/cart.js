@@ -11,7 +11,6 @@ import { cartLocalStorage } from '../store/localStorage'
 const cartReducerDefaultState = []
 
 const removeItem = (state, action) => {
-    cartLocalStorage.removeItem(action.product._id)
     return state.filter(({ product }) => product._id !== action.product._id)
 }
 
@@ -69,12 +68,14 @@ export default (state = cartReducerDefaultState, action) => {
             cartLocalStorage.removeItem(action.product._id)
             return removeItem(state, action)
         case CART_INCREMENT_QTY:
+            cartLocalStorage.incrementQty(action.product._id)
             return changeItemQty(state, action, 1)
         case CART_DECREMENT_QTY:
-            const item = state.find(({ product }) => product._id === action.id)
+            const item = state.find(({ product }) => product._id === action.product._id)
             if (item.qty === 1) {
-                return removeItem(state, action)
+                return state
             }
+            cartLocalStorage.decrementQty(action.product._id)
             return changeItemQty(state, action, -1)
         case CART_CLEAR:
             cartLocalStorage.clear()

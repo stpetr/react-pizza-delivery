@@ -21,7 +21,6 @@ export const Header = () => (
                 <Link className="header__link" to="/about">
                     About Us
                 </Link>
-                <CartWidget />
             </div>
         </div>
     </header>

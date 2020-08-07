@@ -17,17 +17,17 @@ export const cartAddItem = (product) => ({
 
 export const cartRemoveItem = (product) => ({
   type: CART_REMOVE_ITEM,
-  id: product._id
+  product
 })
 
 export const cartIncrementQty = (product) => ({
   type: CART_INCREMENT_QTY,
-  id: product._id
+  product
 })
 
 export const cartDecrementQty = (product) => ({
   type: CART_DECREMENT_QTY,
-  id: product._id
+  product
 })
 
 export const cartClear = () => ({
