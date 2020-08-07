@@ -16,7 +16,7 @@ const availableCurrencies = [
         id: CURRENCY_EUR,
         name: 'Euro',
         sign: '€',
-        rate: 1.8
+        rate: .85
     }
 ]
 
