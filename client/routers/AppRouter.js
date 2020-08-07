@@ -13,15 +13,13 @@ export const history = createBrowserHistory()
 
 const AppRouter = () => (
     <BrowserRouter history={history}>
-        <div>
-            <Switch>
-                <LayoutRoute path="/" component={HomePage} exact={true} />
-                <LayoutRoute path="/order" component={OrderPage} />
-                <LayoutRoute path="/promo" component={PromoPage} />
-                <LayoutRoute path="/delivery" component={DeliveryPage} />
-                <LayoutRoute component={NotFoundPage} />
-            </Switch>
-        </div>
+        <Switch>
+            <LayoutRoute path="/" component={HomePage} exact={true} />
+            <LayoutRoute path="/order" component={OrderPage} />
+            <LayoutRoute path="/promo" component={PromoPage} />
+            <LayoutRoute path="/delivery" component={DeliveryPage} />
+            <LayoutRoute component={NotFoundPage} />
+        </Switch>
     </BrowserRouter>
 )
 

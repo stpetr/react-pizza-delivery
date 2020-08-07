@@ -3,10 +3,12 @@
 }
 
 html {
+  height: 100%;
   font-size: 62.5%;
 }
 
 body {
+  height: 100%;
   font-size: @m-size;
   font-family: @Roboto;
   color: @dark-grey;
@@ -25,8 +27,22 @@ button {
   }
 }
 
+.app-container {
+  height: 100%;
+}
+
 .is-active {
   font-weight: bold;
+}
+
+.layout-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & > .layout-component-wrap {
+    flex-grow: 1;
+  }
 }
 
 .content-container {
