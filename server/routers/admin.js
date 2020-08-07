@@ -1,10 +1,11 @@
 const express = require('express')
 const Product = require('../models/product')
 const { getMulter, getImageFilter } = require('../utils/multer')
+const auth = require('../middleware/auth')
 
 const router = new express.Router()
 
-router.post('/admin/products', async (req, res) => {
+router.post('/admin/products', auth, async (req, res) => {
     try {
         const product = new Product(req.body)
         await product.save()
@@ -15,7 +16,7 @@ router.post('/admin/products', async (req, res) => {
     }
 })
 
-router.patch('/admin/products/:id', async (req, res) => {
+router.patch('/admin/products/:id', auth, async (req, res) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
@@ -31,7 +32,7 @@ router.patch('/admin/products/:id', async (req, res) => {
 
 const productImageUpload = getMulter('products', { ...getImageFilter(500 * 1024) })
 
-router.patch('/admin/products/:id/image', productImageUpload.single('image'), async (req, res) => {
+router.patch('/admin/products/:id/image', auth, productImageUpload.single('image'), async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
 
@@ -50,7 +51,7 @@ router.patch('/admin/products/:id/image', productImageUpload.single('image'), as
     res.status(400).send({ error: error.message })
 })
 
-router.delete('/admin/products/:id', async (req, res) => {
+router.delete('/admin/products/:id', auth, async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id)
         res.send(product)
