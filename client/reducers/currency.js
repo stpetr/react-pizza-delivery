@@ -1,3 +1,4 @@
+import { currencyLocalStorage } from "../store/localStorage";
 import {
     CHANGE_CURRENCY
 } from '../actions/currency'
@@ -21,9 +22,10 @@ const availableCurrencies = [
 
 const getCurrencyById = (id) => availableCurrencies.find((currency) => currency.id === id)
 
+const currencyFromLocalStorage = getCurrencyById(currencyLocalStorage.getCurrency())
 const initialState = {
     currencyList: availableCurrencies,
-    currentCurrency: getCurrencyById(CURRENCY_USD)
+    currentCurrency: currencyFromLocalStorage ? currencyFromLocalStorage : getCurrencyById(CURRENCY_USD)
 }
 
 const currencyReducer = (state = initialState, action) => {
@@ -31,6 +33,7 @@ const currencyReducer = (state = initialState, action) => {
         case CHANGE_CURRENCY:
             const newCurrentCurrency = getCurrencyById(action.currencyId)
             if (newCurrentCurrency) {
+                currencyLocalStorage.changeCurrency(newCurrentCurrency.id)
                 return {
                     ...state,
                     currentCurrency: newCurrentCurrency

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { cartAddItem } from "../actions/cart";
+import { getAmountInCurrencyFormatted } from '../helpers/amount-in-currency'
 
 export class ProductItem extends React.Component {
     onAddToCart = (product) => {
@@ -22,15 +23,19 @@ export class ProductItem extends React.Component {
                 </div>
                 <div className="product-item__bottom">
                     <button className="btn -pill" onClick={() => this.onAddToCart(product)}>Add to cart</button>
-                    <span className="product-item__price">{product.price}</span>
+                    <span className="product-item__price">{getAmountInCurrencyFormatted(product.price, this.props.currency)}</span>
                 </div>
             </div>
         )
     }
 }
 
+const mapStateToProps = (state) => ({
+    currency: state.currency
+})
+
 const mapDispatchToProps = (dispatch) => ({
     cartAddItem: (product) => dispatch(cartAddItem(product))
 })
 
-export default connect(undefined, mapDispatchToProps)(ProductItem)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)

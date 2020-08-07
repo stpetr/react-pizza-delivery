@@ -1,4 +1,5 @@
 const CART_KEY = 'cart'
+const CURRENCY_KEY = 'currency'
 
 const getCart = () => {
     try {
@@ -60,5 +61,14 @@ export const cartLocalStorage = {
     },
     clear() {
         saveCart({})
+    }
+}
+
+export const currencyLocalStorage = {
+    getCurrency() {
+        return localStorage.getItem(CURRENCY_KEY)
+    },
+    changeCurrency(value) {
+        localStorage.setItem(CURRENCY_KEY, value)
     }
 }
