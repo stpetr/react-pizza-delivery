@@ -10,6 +10,7 @@ import DeliveryPage from '../components/DeliveryPage'
 import NotFoundPage from '../components/NotFoundPage'
 import OrderConfirmPage from '../components/OrderConfirmPage'
 import OrderSuccessPage from '../components/OrderSuccessPage'
+import AboutUsPage from "../components/AboutUsPage";
 
 export const history = createBrowserHistory()
 
@@ -22,6 +23,7 @@ const AppRouter = () => (
             <LayoutRoute path="/order-success" component={OrderSuccessPage} />
             <LayoutRoute path="/promo" component={PromoPage} />
             <LayoutRoute path="/delivery" component={DeliveryPage} />
+            <LayoutRoute path="/about" component={AboutUsPage} />
             <LayoutRoute component={NotFoundPage} />
         </Switch>
     </BrowserRouter>
