@@ -8,10 +8,21 @@ html {
 
 body {
   font-size: @m-size;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: @Roboto;
   color: @dark-grey;
   line-height: 1.6;
   background-color: @off-white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  font-family: @RobotoSlab;
+}
+
+button {
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 .is-active {
@@ -19,7 +30,27 @@ body {
 }
 
 .content-container {
-  max-width: 80rem;
+  max-width: 120rem;
   margin: 0 auto;
   padding: 0 @m-size;
+}
+
+.with-sidebar {
+  display: flex;
+
+  .sidebar {
+    flex: 0 0;
+    flex-basis: calc(25% - 40px);
+    margin-left: 40px;
+  }
+}
+
+.btn {
+  &.-pill {
+    padding: 1.5rem 2.5rem;
+    color: @white;
+    background-color: @brand-color;
+    border: none;
+    border-radius: 2.4rem;
+  }
 }

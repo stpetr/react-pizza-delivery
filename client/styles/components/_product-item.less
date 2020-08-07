@@ -1,6 +1,20 @@
 .product-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   background-color: @white;
+
+  &__top {
+
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+  }
 
   &__image {
     display: block;
@@ -14,10 +28,20 @@
   }
 
   &__title {
-    margin-top: 0;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: @off-black;
   }
 
   &__description {
     margin-top: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: @light-grey;
+  }
+
+  &__price {
+    font-weight: 500;
   }
 }

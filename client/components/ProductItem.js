@@ -9,14 +9,20 @@ export class ProductItem extends React.Component {
     render() {
         const { product } = this.props
         return (
-            <div className={'product-item'}>
-                { product.image &&
+            <div className="product-item">
+                <div className="product-item__top">
+                    { product.image &&
                     <img src={`/uploads/products/${product.image}`} className="product-item__image" />
-                }
-                <div className="product-item__content">
-                    <h3 className="product-item__title">{product.title}</h3>
-                    <p className="product-item__description">{product.description}</p>
-                    <button onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                    }
+                    <div className="product-item__content">
+
+                        <h3 className="product-item__title">{product.title}</h3>
+                        <p className="product-item__description">{product.description}</p>
+                    </div>
+                </div>
+                <div className="product-item__bottom">
+                    <button className="btn -pill" onClick={() => this.onAddToCart(product)}>Add to cart</button>
+                    <span className="product-item__price">{product.price}</span>
                 </div>
             </div>
         )
