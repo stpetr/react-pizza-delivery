@@ -12,7 +12,7 @@ export class OrderConfirmPage extends React.Component {
 
         this.state  = {
             deliveryCost: 2.5,
-            freeDeliveryThreshold: 500
+            freeDeliveryThreshold: 50
         }
     }
     getDeliveryCost = () => {
