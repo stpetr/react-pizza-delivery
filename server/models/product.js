@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema({
         min: 1
     },
     image: {
-        type: String
+        type: Buffer
     },
     isActive: {
         type: Boolean,

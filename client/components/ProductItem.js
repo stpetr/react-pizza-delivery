@@ -13,7 +13,7 @@ export class ProductItem extends React.Component {
             <div className="product-item">
                 <div className="product-item__top">
                     { product.image &&
-                    <img src={`/uploads/products/${product.image}`} className="product-item__image" />
+                    <img src={`${process.env.API_URL}product/${product._id}/image`} className="product-item__image" />
                     }
                     <div className="product-item__content">
 

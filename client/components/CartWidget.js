@@ -28,7 +28,7 @@ export class CartWidget extends React.Component {
                             { this.props.cart.map((item) => (
                                 <li className="cart-widget__products-item" key={item.product._id}>
                                     <div className="cart-widget__products-item-info">
-                                        <img className="cart-widget__products-item-image" src={`/uploads/products/${item.product.image}`} />
+                                        <img className="cart-widget__products-item-image" src={`${process.env.API_URL}product/${item.product._id}/image`} />
                                         <div>
                                             <div className="cart-widget__products-item-title">{item.product.title}</div>
                                             <div className="cart-widget__products-item-description">{item.product.description}</div>

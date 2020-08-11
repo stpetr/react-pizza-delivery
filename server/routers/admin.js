@@ -1,4 +1,5 @@
 const express = require('express')
+const multer = require('multer')
 const Product = require('../models/product')
 const { getMulter, getImageFilter } = require('../utils/multer')
 const auth = require('../middleware/auth')
@@ -30,9 +31,9 @@ router.patch('/admin/products/:id', auth, async (req, res) => {
     }
 })
 
-const productImageUpload = getMulter('products', { ...getImageFilter(500 * 1024) })
+const productImageUpload = multer({ ...getImageFilter(500 * 1024) })
 
-router.patch('/admin/products/:id/image', auth, productImageUpload.single('image'), async (req, res) => {
+router.post('/admin/products/:id/image', auth, productImageUpload.single('image'), async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
 
@@ -40,7 +41,7 @@ router.patch('/admin/products/:id/image', auth, productImageUpload.single('image
             return res.status(404).send()
         }
 
-        product.image = req.file.filename
+        product.image = req.file.buffer
         await product.save()
 
         res.send(product)
