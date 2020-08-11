@@ -8,7 +8,8 @@ class ProductList extends React.Component {
 
         if (error) {
             return (
-                <div className="product-list-failure">
+                <div className="product-list__failure">
+                    <p><strong>An error occurred while loading products. Please try again later ;-(</strong></p>
                     <p>{error}</p>
                 </div>
             )
@@ -16,7 +17,9 @@ class ProductList extends React.Component {
 
         if (loading) {
             return (
-                <div className="product-list-loading"></div>
+                <div className="product-list__loading">
+                    <img src="images/loader.gif" />
+                </div>
             )
         }
 
