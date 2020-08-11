@@ -17,10 +17,6 @@ const orderReducer = (state = initialState, action) => {
     switch (action.type) {
         case ORDER_UPDATE:
             const formData = action.formData
-            for (let key in formData) {
-                formData[key] = String(formData[key]).trim()
-            }
-
             if (formData.name && formData.lastName && formData.address) {
                 formData.isValidated = true
             } else {

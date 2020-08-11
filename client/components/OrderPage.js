@@ -44,6 +44,13 @@ export class OrderPage extends React.Component {
     onSubmit = (e) => {
         e.preventDefault()
         if (this.props.order.isValidated) {
+            // Trim order data
+            const state = { ...this.state }
+            for (let key in state) {
+                state[key] = String(state[key]).trim()
+            }
+            this.props.updateOrder(state)
+
             this.props.history.push('/order-confirm')
         } else {
             this.setState(() => ({ error: 'Something went wrong' }), () => this.props.updateOrder(this.state))
