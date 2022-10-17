@@ -8,11 +8,12 @@ if (process.env.NODE_ENV === 'test') {
     require('dotenv').config({ path: '.env.test' })
 } else if (process.env.NODE_ENV === 'development') {
     require('dotenv').config({ path: '.env.development' })
+} else if (process.env.NODE_ENV === 'production') {
+    require('dotenv').config({ path: '.env' })
 }
 
 module.exports = (env, argv) => {
     const isProduction = env === 'production'
-    
     return {
         entry: ['babel-polyfill', './client/app.js'],
         output: {
@@ -24,7 +25,7 @@ module.exports = (env, argv) => {
             rules: [
                 {
                     loader: 'babel-loader',
-                    test: /\.js$/, 
+                    test: /\.js$/,
                     exclude: /node_modules/
                 },
                 {
@@ -60,7 +61,7 @@ module.exports = (env, argv) => {
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
             contentBase: path.join(__dirname, 'public'),
-            port: 3000,
+            port: process.env.CLIENT_PORT || 3000,
             historyApiFallback: true,
             publicPath: '/dist/'
         }
