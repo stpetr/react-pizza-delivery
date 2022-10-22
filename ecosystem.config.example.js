@@ -5,9 +5,9 @@ module.exports = {
     env_production: {
       NODE_ENV: "production",
       PORT: 4001,
-      MONGODB_URL: "mongodb://127.0.0.1/petes-bits_pizza",
-      JWT_SECRET: "buypizzapiewhatasecretohmy",
-      PLAIN_SECRET: "buypizzapieplainsecret",
+      MONGODB_URL: "mongodb://127.0.0.1/db-name",
+      JWT_SECRET: "",
+      PLAIN_SECRET: "",
     },
   }]
 }

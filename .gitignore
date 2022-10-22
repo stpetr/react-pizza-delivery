@@ -110,3 +110,5 @@ dist
 config/*
 !config/example.env
 .env.development
+ecosystem.config.js
+ecosystem-dev.config.js
