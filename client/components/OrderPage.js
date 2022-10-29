@@ -1,125 +1,127 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { updateOrder, clearOrder } from '../actions/order'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateOrder } from '../actions/order'
+import { isOrderInfoValid } from '../helpers/order'
 import CartWidget from './CartWidget'
 
-export class OrderPage extends React.Component {
-    constructor(props) {
-        super(props)
+export const OrderPage = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const { order, cart } = useSelector(state => state)
+  const [orderInfo, setOrderInfo] = useState({
+    name: '',
+    lastName: '',
+    address: '',
+    note: '',
+    ...order,
+    error: '',
+  })
+  const orderInfoRef = useRef()
+  const isOrderValid = useMemo(() => isOrderInfoValid(orderInfo) && cart.length > 0, [orderInfo, cart])
 
-        if (!this.props.cart.length) {
-            this.props.history.push('/')
-        }
+  const saveOrder = () => {
+    const orderInfoTrim = {}
+    const orderInfo = orderInfoRef.current
+    for (let key in orderInfo) {
+      orderInfoTrim[key] = String(orderInfo[key]).trim()
+    }
+    dispatch(updateOrder(orderInfoTrim))
+  }
 
-        this.state = {
-            name: this.props.order.name,
-            lastName: this.props.order.lastName,
-            address: this.props.order.address,
-            note: this.props.order.note,
-            error: '',
-        }
+  useEffect(() => {
+    // Always save order info when leaving this page
+    return () => {
+      saveOrder()
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!this.props.cart.length) {
-            this.props.history.push('/')
-        }
-    }
-    isOrderValid = () => this.props.order.isValidated && this.props.cart.length
-    onNameChange = (e) => {
-        const name = e.target.value
-        this.setState(() => ({ name }), () => this.props.updateOrder(this.state))
-    }
-    onLastNameChange = (e) => {
-        const lastName = e.target.value
-        this.setState(() => ({ lastName }), () => this.props.updateOrder(this.state))
-    }
-    onAddressChange = (e) => {
-        const address = e.target.value
-        this.setState(() => ({ address }), () => this.props.updateOrder(this.state))
-    }
-    onNoteChange = (e) => {
-        const note = e.target.value
-        this.setState(() => ({ note }), () => this.props.updateOrder(this.state))
-    }
-    onSubmit = (e) => {
-        e.preventDefault()
-        if (this.props.order.isValidated) {
-            // Trim order data
-            const state = { ...this.state }
-            for (let key in state) {
-                state[key] = String(state[key]).trim()
-            }
-            this.props.updateOrder(state)
+  }, [])
 
-            this.props.history.push('/order-confirm')
-        } else {
-            this.setState(() => ({ error: 'Something went wrong' }), () => this.props.updateOrder(this.state))
+  useEffect(() => {
+    orderInfoRef.current = orderInfo
+  }, [orderInfo])
+
+  const onOrderInfoChange = (prop, e) => {
+    const value = e.target.value
+
+    setOrderInfo((prev) => {
+      return {
+        ...prev,
+        [prop]: value,
+      }
+    })
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    console.log('Submitting', isOrderValid)
+
+    if (isOrderValid) {
+      saveOrder()
+      history.push('/order-confirm')
+    } else {
+      setOrderInfo((prev) => {
+        return {
+          ...prev,
+          error: 'Something went wrong',
         }
+      })
     }
-    render() {
-        return (
-            <div className="page page__order">
-                <h1>Complete your order's details</h1>
-                { this.props.order.error &&
-                    <div className="form__error">
-                        <p>An error occurred, please try again later</p>
-                        <p>Details: {this.props.order.error}</p>
-                    </div>
-                }
-                <div className="with-sidebar">
-                    <div className="content">
-                        <form className="form" onSubmit={this.onSubmit}>
-                            <input
-                                type="text"
-                                className="text-input"
-                                placeholder="Name"
-                                autoFocus
-                                value={this.state.name}
-                                onChange={this.onNameChange}
-                            />
-                            <input
-                                type="text"
-                                className="text-input"
-                                placeholder="Last Name"
-                                autoFocus
-                                value={this.state.lastName}
-                                onChange={this.onLastNameChange}
-                            />
-                            <input
-                                type="text"
-                                className="text-input -full-width"
-                                placeholder="Address"
-                                autoFocus
-                                value={this.state.address}
-                                onChange={this.onAddressChange}
-                            />
-                            <textarea
-                                className="text-input -textarea -full-width"
-                                placeholder="Type us something"
-                                value={this.state.note}
-                                onChange={this.onNoteChange}
-                            >&nbsp;</textarea>
-                            <div>
-                                <input type="submit" value="Next" className="btn -pill" disabled={this.isOrderValid() ? '' : 'disabled' } />
-                            </div>
-                        </form>
-                    </div>
-                    <div className="sidebar">
-                        <CartWidget />
-                    </div>
-                </div>
+  }
+
+  return (
+    <div className="page page__order">
+      <h1>Complete your order's details</h1>
+      {order.error &&
+        <div className="form__error">
+          <p>An error occurred, please try again later</p>
+          <p>Details: {order.error}</p>
+        </div>
+      }
+      <div className="with-sidebar">
+        <div className="content">
+          <form className="form" onSubmit={onSubmit}>
+            <input
+              type="text"
+              className="text-input"
+              placeholder="Name"
+              autoFocus
+              value={orderInfo.name}
+              onChange={onOrderInfoChange.bind(null, 'name')}
+            />
+            <input
+              type="text"
+              className="text-input"
+              placeholder="Last Name"
+              autoFocus
+              value={orderInfo.lastName}
+              onChange={onOrderInfoChange.bind(null, 'lastName')}
+            />
+            <input
+              type="text"
+              className="text-input -full-width"
+              placeholder="Address"
+              autoFocus
+              value={orderInfo.address}
+              onChange={onOrderInfoChange.bind(null, 'address')}
+            />
+            <textarea
+              className="text-input -textarea -full-width"
+              placeholder="Type us something"
+              value={orderInfo.note}
+              onChange={onOrderInfoChange.bind(null, 'note')}
+            >&nbsp;</textarea>
+            <div>
+              <input type="submit" value="Next" className="btn -pill" disabled={!isOrderValid}/>
             </div>
-        )
-    }
+          </form>
+        </div>
+        <div className="sidebar">
+          <CartWidget/>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => ({
-    order: state.order,
-    cart: state.cart,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    updateOrder: (formData) => dispatch(updateOrder(formData)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderPage)
+export default OrderPage
