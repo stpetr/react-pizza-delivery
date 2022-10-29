@@ -54,8 +54,6 @@ export const OrderPage = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    console.log('Submitting', isOrderValid)
-
     if (isOrderValid) {
       saveOrder()
       history.push('/order-confirm')
